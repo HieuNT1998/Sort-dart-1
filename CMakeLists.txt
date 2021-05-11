@@ -34,32 +34,31 @@ elseif(WIN32)
     include_directories(${EIGEN3_INCLUDE_DIR})
 endif()
 include_directories(${PROJECT_SOURCE_DIR}/include)
-include_directories(${CMAKE_JS_INC})
 
 file(GLOB SOURCE_FILES src/*.cpp src/*.cc src/*.h)
 
 
-add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
-# add_executable(${CMAKE_PROJECT_NAME}-bin ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+# # add_executable(${CMAKE_PROJECT_NAME}-bin ${SOURCE_FILES})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
+# set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
 
-target_link_libraries (
-    ${CMAKE_PROJECT_NAME}
-    ${OpenCV_LIBS}
-    ${Boost_LIBRARIES}
-)
+# target_link_libraries (
+#     ${CMAKE_PROJECT_NAME}
+#     ${OpenCV_LIBS}
+#     ${Boost_LIBRARIES}
+# )
 
-target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
+# target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
 
-# Include Node-API wrappers
-execute_process(COMMAND node -p "require('node-addon-api').include"
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        OUTPUT_VARIABLE NODE_ADDON_API_DIR
-        )
-string(REGEX REPLACE "[\r\n\"]" "" NODE_ADDON_API_DIR ${NODE_ADDON_API_DIR})
+# # Include Node-API wrappers
+# execute_process(COMMAND node -p "require('node-addon-api').include"
+#         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+#         OUTPUT_VARIABLE NODE_ADDON_API_DIR
+#         )
+# string(REGEX REPLACE "[\r\n\"]" "" NODE_ADDON_API_DIR ${NODE_ADDON_API_DIR})
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${NODE_ADDON_API_DIR})
+# target_include_directories(${PROJECT_NAME} PRIVATE ${NODE_ADDON_API_DIR})
 
-# define NPI_VERSION
-add_definitions(-DNAPI_VERSION=3)
+# # define NPI_VERSION
+# add_definitions(-DNAPI_VERSION=3)

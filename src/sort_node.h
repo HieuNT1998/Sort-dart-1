@@ -5,11 +5,10 @@
 #include <vector>
 #include <opencv2/core.hpp>
 #include "tracker.h"
-#include <napi.h>
 
 namespace sortnode
 {
-    class SortNode : public Napi::ObjectWrap<SortNode>
+    class SortNode
     {
     public:
         int kMinHits = 3;
@@ -20,10 +19,9 @@ namespace sortnode
         int frame_index = 0;
         Tracker tracker;
 
-        static Napi::Object Init(Napi::Env env, Napi::Object exports);
-        SortNode(const Napi::CallbackInfo& info);
+        SortNode(int kMinHits, int kMaxAge, int kMaxCoastCycles, float kIoUThreshold, float kMinConfidence, int frame_index);
+        float* update(float* detectionList, float *landmarksList, float *scoresList, int detectionLen, int landmarkLen);
 
-        Napi::Value update(const Napi::CallbackInfo& info);
     };
 } // namespace sortnode
 #endif

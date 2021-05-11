@@ -1,7 +1,5 @@
-DOCKER_NAME=sort
+docker run -v "/home/hieunt/redux tut/sort-dart/:/sort-dart/"  -it --rm sort-dart /bin/bash
 
-docker run \
-    -it --rm \
-    -v $PWD:/sort-node/ \
-    --name sort-node \
-    $DOCKER_NAME /bin/bash
+
+
+# dartTest -> makefile -> so -> run dart test.
